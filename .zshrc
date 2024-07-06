@@ -164,8 +164,6 @@ zshconfig() {
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
 
 export PATH="$PATH:/Users/kaleb/Library/Application Support/Coursier/bin"
 export PATH="$PATH:/Users/kaleb/go/bin"
