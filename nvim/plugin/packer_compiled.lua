@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/kaleb/.cache/nvim/packer_hererocks/2.1.1707061634/share/lua/5.1/?.lua;/home/kaleb/.cache/nvim/packer_hererocks/2.1.1707061634/share/lua/5.1/?/init.lua;/home/kaleb/.cache/nvim/packer_hererocks/2.1.1707061634/lib/luarocks/rocks-5.1/?.lua;/home/kaleb/.cache/nvim/packer_hererocks/2.1.1707061634/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/kaleb/.cache/nvim/packer_hererocks/2.1.1707061634/lib/lua/5.1/?.so"
+local package_path_str = "/home/kaleb/.cache/nvim/packer_hererocks/2.1.1713773202/share/lua/5.1/?.lua;/home/kaleb/.cache/nvim/packer_hererocks/2.1.1713773202/share/lua/5.1/?/init.lua;/home/kaleb/.cache/nvim/packer_hererocks/2.1.1713773202/lib/luarocks/rocks-5.1/?.lua;/home/kaleb/.cache/nvim/packer_hererocks/2.1.1713773202/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/kaleb/.cache/nvim/packer_hererocks/2.1.1713773202/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -228,11 +228,6 @@ _G.packer_plugins = {
     path = "/home/kaleb/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
     url = "https://github.com/mfussenegger/nvim-jdtls"
   },
-  ["nvim-lens.nvim"] = {
-    loaded = true,
-    path = "/home/kaleb/.local/share/nvim/site/pack/packer/start/nvim-lens.nvim",
-    url = "https://github.com//Users/kaleb/Desktop/tests/nvim-lens.nvim"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/kaleb/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -266,7 +261,7 @@ _G.packer_plugins = {
   ["ollama-pilot.nvim"] = {
     loaded = true,
     path = "/home/kaleb/.local/share/nvim/site/pack/packer/start/ollama-pilot.nvim",
-    url = "https://github.com//Users/kaleb/Desktop/tests/ollama-pilot.nvim"
+    url = "/home/kaleb/Projects/ollama-pilot.nvim"
   },
   ["onedark.nvim"] = {
     loaded = true,

@@ -91,8 +91,8 @@ return require("packer").startup(function(use)
 
     --  NEOVIM DEVELOPMENT
     use "folke/neodev.nvim"
-    use "/Users/kaleb/Desktop/tests/ollama-pilot.nvim"
-    use "/Users/kaleb/Desktop/tests/nvim-lens.nvim"
+    use "/home/kaleb/Projects/ollama-pilot.nvim"
+    -- use "/Users/kaleb/Desktop/tests/nvim-lens.nvim"
 
     -- LANGUAGE SPECIFIC PLUGINS
     -- PYTHON
