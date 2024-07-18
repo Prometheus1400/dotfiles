@@ -1,5 +1,11 @@
 require('neodev').setup()
-require('mason').setup({})
+local _border = "rounded"
+
+require('mason').setup({
+    ui = {
+        border = _border
+    }
+})
 require('mason-lspconfig').setup({
     -- Replace the language servers listed here
     -- with the ones you want to install
@@ -56,7 +62,6 @@ require('mason-lspconfig').setup({
 })
 
 -- popup borders
-local _border = "single"
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover, { border = _border }
 )

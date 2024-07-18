@@ -8,24 +8,6 @@ return require("packer").startup(function(use)
         requires = { { "nvim-lua/plenary.nvim" } }
     }
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-    -- use {
-    --     "VonHeikemen/lsp-zero.nvim",
-    --     branch = "v3.x",
-    --     requires = {
-    --         --- Uncomment the two plugins below if you want to manage the language servers from neovim
-    --         { "williamboman/mason.nvim" },
-    --         { "williamboman/mason-lspconfig.nvim" },
-    --         { "nvimtools/none-ls.nvim" },
-    --         { "L3MON4D3/LuaSnip" },
-    --         { "neovim/nvim-lspconfig" },
-    --         { "hrsh7th/nvim-cmp" },
-    --         { "hrsh7th/cmp-nvim-lsp" },
-    --         { "hrsh7th/cmp-buffer" },
-    --         { "hrsh7th/cmp-path" },
-    --         { "hrsh7th/cmp-cmdline" },
-    --         { "hrsh7th/cmp-nvim-lsp-signature-help" },
-    --     }
-    -- }
     -- lsp stuff
     use "williamboman/mason.nvim"
     use "williamboman/mason-lspconfig.nvim"
@@ -38,7 +20,6 @@ return require("packer").startup(function(use)
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/cmp-nvim-lsp-signature-help"
-
     use "mbbill/undotree"
     use "tpope/vim-commentary"
     use {
@@ -88,13 +69,12 @@ return require("packer").startup(function(use)
         requires = "nvim-lua/plenary.nvim"
     }
     use "christoomey/vim-tmux-navigator" -- for seamless navigation across tmux and nvim
-    use "j-hui/fidget.nvim"
+    use "j-hui/fidget.nvim" -- lsp progress messages
+    -- use "romgrk/barbar.nvim" -- TABS: still working out if I like this or not
 
     -- markdown stuff
     use { "ellisonleao/glow.nvim", config = function() require("glow").setup() end }
     use { "lukas-reineke/headlines.nvim", after = "nvim-treesitter", config = function() require("headlines").setup() end }
-
-    -- use "romgrk/barbar.nvim" -- TABS: still working out if I like this or not
 
     -- DEBUGGER
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }

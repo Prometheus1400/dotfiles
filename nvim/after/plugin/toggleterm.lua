@@ -10,7 +10,6 @@ local lazygit  = Terminal:new({
     },
 })
 local normal_term = Terminal:new({
-    -- cmd = "lazygit",
     display_name = "terminal",
     hidden = false,
     direction = "float",
@@ -18,7 +17,6 @@ local normal_term = Terminal:new({
         border = "curved",
     },
 })
-
 
 vim.keymap.set("n", "<leader>sg", function()
     lazygit:toggle()
@@ -33,12 +31,6 @@ function _G.set_terminal_keymaps()
     vim.keymap.set('t', 'qq', function()
         toggleterm.toggle()
     end, opts)
-    -- vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-    -- vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-    -- vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-    -- vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-    -- vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-    -- vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
 
 vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
