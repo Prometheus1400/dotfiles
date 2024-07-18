@@ -8,24 +8,37 @@ return require("packer").startup(function(use)
         requires = { { "nvim-lua/plenary.nvim" } }
     }
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-    use {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v3.x",
-        requires = {
-            --- Uncomment the two plugins below if you want to manage the language servers from neovim
-            { "williamboman/mason.nvim" },
-            { "williamboman/mason-lspconfig.nvim" },
-            { "nvimtools/none-ls.nvim" },
-            { "L3MON4D3/LuaSnip" },
-            { "neovim/nvim-lspconfig" },
-            { "hrsh7th/nvim-cmp" },
-            { "hrsh7th/cmp-nvim-lsp" },
-            { "hrsh7th/cmp-buffer" },
-            { "hrsh7th/cmp-path" },
-            { "hrsh7th/cmp-cmdline" },
-            { "hrsh7th/cmp-nvim-lsp-signature-help" },
-        }
-    }
+    -- use {
+    --     "VonHeikemen/lsp-zero.nvim",
+    --     branch = "v3.x",
+    --     requires = {
+    --         --- Uncomment the two plugins below if you want to manage the language servers from neovim
+    --         { "williamboman/mason.nvim" },
+    --         { "williamboman/mason-lspconfig.nvim" },
+    --         { "nvimtools/none-ls.nvim" },
+    --         { "L3MON4D3/LuaSnip" },
+    --         { "neovim/nvim-lspconfig" },
+    --         { "hrsh7th/nvim-cmp" },
+    --         { "hrsh7th/cmp-nvim-lsp" },
+    --         { "hrsh7th/cmp-buffer" },
+    --         { "hrsh7th/cmp-path" },
+    --         { "hrsh7th/cmp-cmdline" },
+    --         { "hrsh7th/cmp-nvim-lsp-signature-help" },
+    --     }
+    -- }
+    -- lsp stuff
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
+    use "nvimtools/none-ls.nvim"
+    use "L3MON4D3/LuaSnip"
+    use "neovim/nvim-lspconfig"
+    use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-cmdline"
+    use "hrsh7th/cmp-nvim-lsp-signature-help"
+
     use "mbbill/undotree"
     use "tpope/vim-commentary"
     use {
@@ -35,9 +48,7 @@ return require("packer").startup(function(use)
 
     -- THEMES
     use { "catppuccin/nvim", as = "catppuccin", }
-    use "EdenEast/nightfox.nvim"
     use "navarasu/onedark.nvim"
-    use "AlexvZyl/nordic.nvim"
     use { "rose-pine/neovim", as = "rose-pine", }
 
     -- GIT STUFF

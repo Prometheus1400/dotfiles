@@ -48,6 +48,7 @@ plugins=(
     zsh-autosuggestions
     # zsh-autocomplete
     zsh-syntax-highlighting
+    zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -95,8 +96,8 @@ klog() {
     pod_name=$(echo $pod | awk '{print $1}')
     kubectl logs -f -n $namespace $pod_name | tspin
 }
-kcluster() {
-    cluster=$(cat ~/.kube/config | grep "name: arn:.*cluster/" | sed "/^-.*$/d; s/name: //; s/^[[:space:]]*//" | sort | uniq | fzf --header="Select cluster to set in kubectl context")
+kctx() {
+    cluster=$(k config get-contexts | awk 'NR > 1 {print $2}' | sort | uniq | fzf --header="Select cluster to set in kubectl context")
     if [ -n "$cluster" ]; then
         kubectl config use-context $cluster
     fi

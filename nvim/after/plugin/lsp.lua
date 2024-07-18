@@ -1,40 +1,4 @@
 require('neodev').setup()
-local lsp_zero = require('lsp-zero')
-
-lsp_zero.on_attach(function(client, bufnr)
-    lsp_zero.default_keymaps({ buffer = bufnr })
-
-    local opts = { buffer = bufnr }
-    vim.keymap.set({ 'n' }, '<leader>cf', function()
-        vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-    end, opts)
-    vim.keymap.set({ 'n' }, "<leader>ca", function()
-        vim.lsp.buf.code_action()
-    end, opts)
-    vim.keymap.set({ 'n' }, '<leader>crn', function()
-        vim.lsp.buf.rename()
-    end, opts)
-    vim.keymap.set({ 'n' }, "<leader>crr", function()
-        vim.lsp.buf.references()
-    end, opts)
-    vim.keymap.set({ 'n' }, "<leader>cdo", function()
-        vim.diagnostic.open_float()
-    end, opts)
-    vim.keymap.set({ 'n' }, "<leader>cdj", function()
-        vim.diagnostic.goto_next()
-    end, opts)
-    vim.keymap.set({ 'n' }, "<leader>cdk", function()
-        vim.diagnostic.goto_prev()
-    end, opts)
-end)
-
-lsp_zero.set_sign_icons({
-    error = '✘',
-    warn = '▲',
-    hint = '⚑',
-    info = '»'
-})
-
 require('mason').setup({})
 require('mason-lspconfig').setup({
     -- Replace the language servers listed here
@@ -43,12 +7,28 @@ require('mason-lspconfig').setup({
     handlers = {
         function(server_name)
             local attach_function = function(client, bufnr)
-                -- print(string.format('lsp %s attached!', server_name))
+                local opts = { buffer = bufnr }
+                vim.keymap.set({ 'n' }, 'K', vim.lsp.buf.hover, opts)
+                vim.keymap.set({ 'n' }, 'gd', vim.lsp.buf.definition, opts)
+                vim.keymap.set({ 'n' }, 'gD', vim.lsp.buf.declaration, opts)
+                vim.keymap.set({ 'n' }, 'gi', vim.lsp.buf.implementation, opts)
+                vim.keymap.set({ 'n' }, 'go', vim.lsp.buf.type_definition, opts)
+                vim.keymap.set({ 'n' }, 'gr', vim.lsp.buf.references, opts)
+                -- vim.keymap.set({ 'n' }, 'gs', vim.lsp.buf.signature_help, opts)
+
+                vim.keymap.set({ 'n' }, '<leader>cf',
+                    function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end, opts)
+                vim.keymap.set({ 'n' }, "<leader>ca", vim.lsp.buf.code_action, opts)
+                vim.keymap.set({ 'n' }, '<leader>crn', vim.lsp.buf.rename, opts)
+                -- vim.keymap.set({ 'n' }, "<leader>crr", vim.lsp.buf.references, opts)
+                vim.keymap.set({ 'n' }, "<leader>cdo", vim.diagnostic.open_float, opts)
+                vim.keymap.set({ 'n' }, "<leader>cdn", vim.diagnostic.goto_next, opts)
+                vim.keymap.set({ 'n' }, "<leader>cdp", vim.diagnostic.goto_prev, opts)
             end
             if server_name == "bashls" then
                 require('lspconfig')[server_name].setup({
                     on_attach = attach_function,
-                    filetypes = { 'sh', 'zsh' }
+                    filetypes = { 'sh', 'zsh' },
                 })
             elseif server_name == "pylsp" then
                 require('lspconfig')[server_name].setup({
@@ -74,6 +54,42 @@ require('mason-lspconfig').setup({
         end,
     }
 })
+
+-- popup borders
+local _border = "single"
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, { border = _border }
+)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help, { border = _border }
+)
+require('lspconfig.ui.windows').default_options = {
+  border = _border
+}
+vim.diagnostic.config {
+    float = { border = _border }
+}
+
+-- diagnostic icons
+-- lsp_zero.set_sign_icons({ error = '✘', warn = '▲', hint = '⚑', info = '»' })
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.HINT] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+        },
+        linehl = {
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        },
+        -- numhl = {
+        --     [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        --     -- [vim.diagnostic.severity.WARN] = 'WarningMsg',
+        -- },
+    },
+})
+
 -- extra stuff for python to organize imports
 local null_ls = require("null-ls")
 null_ls.setup({
@@ -81,52 +97,4 @@ null_ls.setup({
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.isort,
     },
-})
-
-local cmp = require('cmp')
-cmp.setup({
-    mapping = cmp.mapping.preset.insert({
-        -- Enter key confirms completion item
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
-        ['<Tab>'] = cmp.mapping.select_next_item(),
-        -- Ctrl + space triggers completion menu
-        ['<C-Space>'] = cmp.mapping.complete(),
-    }),
-    snippet = {
-        expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-        end,
-    },
-    sources = {
-        { name = 'nvim_lsp' },
-        { name = 'nvim_lua' },
-        { name = 'nvim_lsp_signature_help' },
-        { name = 'buffer', keyword_length = 3 },
-    }
-})
-
-cmp.setup.filetype({"sql"}, {
-    sources = {
-        {name = "vim-dadbod-completion" },
-        {name = "buffer", keywork_length = 3 }
-    }
-})
-
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = 'buffer' }
-    }
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-        { name = 'cmdline' }
-    }),
-    matching = { disallow_symbol_nonprefix_matching = false }
 })

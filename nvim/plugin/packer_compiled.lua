@@ -148,11 +148,6 @@ _G.packer_plugins = {
     path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
-  ["lsp-zero.nvim"] = {
-    loaded = true,
-    path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
-    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
-  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/lualine.nvim",
@@ -178,20 +173,10 @@ _G.packer_plugins = {
     path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/neogit",
     url = "https://github.com/NeogitOrg/neogit"
   },
-  ["nightfox.nvim"] = {
-    loaded = true,
-    path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
-    url = "https://github.com/EdenEast/nightfox.nvim"
-  },
   ["none-ls.nvim"] = {
     loaded = true,
     path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/none-ls.nvim",
     url = "https://github.com/nvimtools/none-ls.nvim"
-  },
-  ["nordic.nvim"] = {
-    loaded = true,
-    path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/nordic.nvim",
-    url = "https://github.com/AlexvZyl/nordic.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -366,9 +351,9 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType mysql ++once lua require("packer.load")({'vim-dadbod-completion'}, { ft = "mysql" }, _G.packer_plugins)]]
-vim.cmd [[au FileType sql ++once lua require("packer.load")({'vim-dadbod-completion'}, { ft = "sql" }, _G.packer_plugins)]]
 vim.cmd [[au FileType plsql ++once lua require("packer.load")({'vim-dadbod-completion'}, { ft = "plsql" }, _G.packer_plugins)]]
+vim.cmd [[au FileType sql ++once lua require("packer.load")({'vim-dadbod-completion'}, { ft = "sql" }, _G.packer_plugins)]]
+vim.cmd [[au FileType mysql ++once lua require("packer.load")({'vim-dadbod-completion'}, { ft = "mysql" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 
