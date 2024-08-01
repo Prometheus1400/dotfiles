@@ -70,6 +70,7 @@ return require("packer").startup(function(use)
     }
     use "christoomey/vim-tmux-navigator" -- for seamless navigation across tmux and nvim
     use "j-hui/fidget.nvim" -- lsp progress messages
+    use "tpope/vim-surround"
     -- use "romgrk/barbar.nvim" -- TABS: still working out if I like this or not
 
     -- markdown stuff
