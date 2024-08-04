@@ -148,6 +148,11 @@ _G.packer_plugins = {
     path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["live-server.nvim"] = {
+    loaded = true,
+    path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/live-server.nvim",
+    url = "https://github.com/barrett-ruth/live-server.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/lualine.nvim",
@@ -251,7 +256,7 @@ _G.packer_plugins = {
   ["ollama-pilot.nvim"] = {
     loaded = true,
     path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/ollama-pilot.nvim",
-    url = "/Users/kaleb/Desktop/tests/ollama-pilot.nvim"
+    url = "https://github.com//Users/kaleb/Desktop/tests/ollama-pilot.nvim"
   },
   ["onedark.nvim"] = {
     loaded = true,
@@ -277,6 +282,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/rose-pine",
     url = "https://github.com/rose-pine/neovim"
+  },
+  ["tailwind-tools.nvim"] = {
+    loaded = true,
+    path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/tailwind-tools.nvim",
+    url = "https://github.com/luckasRanarison/tailwind-tools.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -356,9 +366,9 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType sql ++once lua require("packer.load")({'vim-dadbod-completion'}, { ft = "sql" }, _G.packer_plugins)]]
 vim.cmd [[au FileType mysql ++once lua require("packer.load")({'vim-dadbod-completion'}, { ft = "mysql" }, _G.packer_plugins)]]
 vim.cmd [[au FileType plsql ++once lua require("packer.load")({'vim-dadbod-completion'}, { ft = "plsql" }, _G.packer_plugins)]]
-vim.cmd [[au FileType sql ++once lua require("packer.load")({'vim-dadbod-completion'}, { ft = "sql" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 

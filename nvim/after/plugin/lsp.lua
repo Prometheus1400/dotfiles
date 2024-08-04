@@ -52,6 +52,28 @@ require('mason-lspconfig').setup({
                         }
                     }
                 })
+            elseif server_name == "html" then
+                local capabilities = vim.lsp.protocol.make_client_capabilities()
+                capabilities.textDocument.completion.completionItem.snippetSupport = true
+                capabilities.textDocument.publishDiagnostics = {
+                    relatedInformation = true
+                }
+                require('lspconfig')[server_name].setup({
+                    on_attach = attach_function,
+                    capabilities = capabilities,
+                    cmd = { "vscode-html-language-server", "--stdio" },
+                    filetypes = { "html" },
+                    init_options = {
+                        configurationSection = { "html", "css", "javascript" },
+                        embeddedLanguages = {
+                            css = true,
+                            javascript = true
+                        },
+                        provideFormatter = true
+                    },
+                    settings = {},
+                    single_file_support = true
+                })
             else
                 require('lspconfig')[server_name].setup({
                     on_attach = attach_function
@@ -69,7 +91,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     vim.lsp.handlers.signature_help, { border = _border }
 )
 require('lspconfig.ui.windows').default_options = {
-  border = _border
+    border = _border
 }
 vim.diagnostic.config {
     float = { border = _border }
@@ -101,5 +123,8 @@ null_ls.setup({
     sources = {
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.isort,
+        null_ls.builtins.diagnostics.tidy.with({
+            args = {"-errors"}
+        }),
     },
 })
