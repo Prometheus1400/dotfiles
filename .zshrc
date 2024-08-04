@@ -50,7 +50,8 @@ plugins=(
     zsh-syntax-highlighting
     zsh-vi-mode
 )
-
+ZVM_INIT_MODE=sourcing
+ZVM_VI_EDITOR=nvim
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -62,12 +63,21 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
+# aliases, remaps to improved cli tools, functions
 alias k="kubectl"
 alias v="nvim"
 alias vim="nvim"
 alias fzf="fzf-tmux -p"
+alias fzfp="fzf-tmux -p --preview 'bat --color=always {}' --preview-window '~3'"
+eval "$(fzf --zsh)"
+export FZF_TMUX_OPTS='-p80%,60%'
+export FZF_DEFAULT_OPTS=" \
+    --color=bg+:#313244,spinner:#f5e0dc,hl:#f38ba8 \
+    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 alias ls="eza"
-alias cat="bat"
+alias cat="bat --paging=never"
+eval "$(zoxide init --cmd cd zsh)"
 knsset() {
     kubectl config set-context --current --namespace=$1
 }
@@ -108,18 +118,6 @@ tcopy() {
         echo "$word" | pbcopy
     fi
 }
-stargate() {
-    cd ~/Desktop/stargate-stuff/stargate
-}
-dhari() {
-    cd ~/Desktop/shuri/dhari
-}
-requotes() {
-    cd ~/Desktop/stargate-stuff/pipelines/use-cases/arcadia-pipelines/deployments/uat/aws/arcadia-main-test-2345/requote365-arcadiamain-test
-}
-pipelines() {
-    cd ~/Desktop/stargate-stuff/pipelines
-}
 vconfig() {
     nvim ~/.config/nvim
 }
@@ -127,14 +125,17 @@ zshconfig() {
     nvim ~/.zshrc
 }
 
+addToPath() {
+    PATH="$1:$PATH"
+}
+addToPath "/opt/homebrew/opt/libpq/bin"
+addToPath "/Users/kaleb/Library/Application Support/Coursier/bin"
+addToPath "/Users/kaleb/go/bin"
+addToPath "$HOME/.jenv/bin"
+
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
-
-export PATH="$PATH:/Users/kaleb/Library/Application Support/Coursier/bin"
-export PATH="$PATH:/Users/kaleb/go/bin"
-
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -151,6 +152,3 @@ export WHISPER_PASSWORD=engineerservice
 export WHISPER_KEY_PATH=/Users/kaleb/Documents/Whisper/localhost.apple.com.key.pem
 export WHISPER_CERT_PATH=/Users/kaleb/Documents/Whisper/localhost.apple.com.chain.pem
 
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-export PATH=/opt/homebrew/opt/libpq/bin:$PATH
