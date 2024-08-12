@@ -221,7 +221,7 @@ _G.packer_plugins = {
   ["nvim-lens.nvim"] = {
     loaded = true,
     path = "/Users/kaleb/.local/share/nvim/site/pack/packer/start/nvim-lens.nvim",
-    url = "/Users/kaleb/Desktop/tests/nvim-lens.nvim"
+    url = "https://github.com//Users/kaleb/Desktop/tests/nvim-lens.nvim"
   },
   ["nvim-lspconfig"] = {
     loaded = true,

@@ -23,18 +23,18 @@ local highlight = {
 -- end)
 
 -- dull colors
-hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#8B4B4F" })
-    vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#948661" })
-    vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#3A6B8C" })
-    vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#87684A" })
-    vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#617954" })
-    vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#7C4990" })
-    vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#355E68" })
-    -- vim.api.nvim_set_hl(0, "IblScope", { fg = "#F00000" })
-end)
+-- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    -- vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#8B4B4F" })
+    -- vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#948661" })
+    -- vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#3A6B8C" })
+    -- vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#87684A" })
+    -- vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#617954" })
+    -- vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#7C4990" })
+    -- vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#355E68" })
+    -- -- vim.api.nvim_set_hl(0, "IblScope", { fg = "#F00000" })
+-- end)
 
-local isEnabled = false
+local isEnabled = true
 require("ibl").setup({
     scope = {
         enabled = false,
@@ -42,7 +42,7 @@ require("ibl").setup({
         show_end = false,
     },
     indent = {
-        highlight = highlight,
+        -- highlight = highlight,
         char = "│",
     },
     enabled = isEnabled

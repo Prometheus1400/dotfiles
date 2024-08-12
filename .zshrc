@@ -96,6 +96,15 @@ kns() {
         kubectl config set-context --current --namespace=$ns
     fi
 }
+ka() {
+    command=$1
+    resource=$2
+    names=$(k get $resource | awk 'NR > 1 {print $1}' | fzf -m --header="Pick resources")
+    if [ -n "$names" ]; then
+        echo "running: kubectl $command $resource $names"
+        kubectl $command $resource $names
+    fi
+}
 klog() {
     pod=$(kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,NAMESPACE:.metadata.namespace --no-headers | fzf --header="Select a pod to tail logs")
     if [ -z "$pod" ]; then
