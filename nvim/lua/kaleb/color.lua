@@ -67,5 +67,6 @@ require("rose-pine").setup({
 })
 
 vim.cmd('colorscheme catppuccin-mocha')
+-- vim.cmd('colorscheme nordern')
 -- vim.cmd("colorscheme onedark")
 -- vim.cmd("colorscheme rose-pine")

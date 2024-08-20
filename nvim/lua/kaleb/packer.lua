@@ -20,17 +20,38 @@ return require("packer").startup(function(use)
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/cmp-nvim-lsp-signature-help"
-    use "mbbill/undotree"
-    use "tpope/vim-commentary"
+    use "mbbill/undotree"           -- undotree
+    use "tpope/vim-commentary"      -- better comment commands
+    use "nvim-lualine/lualine.nvim" -- pretty status line on bottom
     use {
-        "nvim-tree/nvim-tree.lua",
-        requires = { { "nvim-tree/nvim-web-devicons" } }
+        "nvim-tree/nvim-tree.lua",  -- file tree
+        requires = { "nvim-tree/nvim-web-devicons" }
+    }
+    use {
+        "windwp/nvim-autopairs", -- better parenthesis and bracket completion similar to vscode or intellij
+        config = function()
+            require("nvim-autopairs").setup({})
+        end
+    }
+    use({
+        "kylechui/nvim-surround", -- make keybinds for surrounding/deleting surrounds feel native
+        tag = "*",
+        config = function()
+            require("nvim-surround").setup({})
+        end
+    })
+    use {
+        "folke/trouble.nvim", -- work with diagnostics better
+        config = function()
+            require("trouble").setup({})
+        end
     }
 
     -- THEMES
     use { "catppuccin/nvim", as = "catppuccin", }
     use "navarasu/onedark.nvim"
     use { "rose-pine/neovim", as = "rose-pine", }
+    use { 'fcancelinha/nordern.nvim', as = "nordern" }
 
     -- GIT STUFF
     use "tpope/vim-fugitive"
@@ -44,7 +65,6 @@ return require("packer").startup(function(use)
         requires = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
-            "nvim-telescope/telescope.nvim"
         }
     }
 
@@ -60,19 +80,30 @@ return require("packer").startup(function(use)
     -- OTHER
     use "akinsho/toggleterm.nvim"                 -- popup terminal used for terminal and lazygit
     use "nvim-treesitter/playground"              -- can see the AST for treesitter
-    use "nvim-lualine/lualine.nvim"               -- pretty status line on bottom
     use "brenoprata10/nvim-highlight-colors"      -- highlights hex colors
     use "lukas-reineke/indent-blankline.nvim"     -- helps when indent is important
     use "nvim-treesitter/nvim-treesitter-context" -- pin nested function or class at top
     use {
         "folke/todo-comments.nvim",               -- highlights 'TODO:' comments
-        requires = "nvim-lua/plenary.nvim"
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("todo-comments").setup({})
+        end
     }
     use "christoomey/vim-tmux-navigator" -- for seamless navigation across tmux and nvim
-    use "j-hui/fidget.nvim" -- lsp progress messages
-    use "tpope/vim-surround"
-    use "barrett-ruth/live-server.nvim"
-    use "luckasRanarison/tailwind-tools.nvim"
+    use {
+        "j-hui/fidget.nvim",             -- lsp progress messages
+        config = function()
+            require("fidget").setup({})
+        end
+    }
+    use {
+        "barrett-ruth/live-server.nvim", -- live server for serving html
+        config = function()
+            require('live-server').setup({})
+        end
+    }
+    -- use "luckasRanarison/tailwind-tools.nvim"
     -- use "romgrk/barbar.nvim" -- TABS: still working out if I like this or not
 
     -- markdown stuff
@@ -85,8 +116,10 @@ return require("packer").startup(function(use)
 
     --  NEOVIM DEVELOPMENT
     use "folke/neodev.nvim"
-    use "/Users/kaleb/Desktop/tests/ollama-pilot.nvim"
-    use "/Users/kaleb/Desktop/tests/nvim-lens.nvim"
+
+    -- LOCAL PLUGINS
+    -- use "/Users/kaleb/Desktop/tests/ollama-pilot.nvim"
+    -- use "/Users/kaleb/Desktop/tests/nvim-lens.nvim"
 
     -- LANGUAGE SPECIFIC PLUGINS
     -- PYTHON

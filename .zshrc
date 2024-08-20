@@ -78,6 +78,8 @@ export FZF_DEFAULT_OPTS=" \
 alias ls="eza"
 alias cat="bat --paging=never"
 eval "$(zoxide init --cmd cd zsh)"
+# optiosn for k9s
+export EDITOR=nvim
 knsset() {
     kubectl config set-context --current --namespace=$1
 }

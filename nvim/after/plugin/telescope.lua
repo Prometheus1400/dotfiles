@@ -23,7 +23,6 @@ vim.keymap.set('n', '<leader>fm', function()
 end, {})
 
 local actions = require('telescope.actions')
-
 local telescope = require('telescope')
 telescope.setup({
     defaults = {
@@ -33,8 +32,8 @@ telescope.setup({
                 -- ["<CR>"] = actions.select_vertical,
                 ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
                 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-                -- ["<C-k>"] = actions.toggle_selection + actions.move_selection_worse,
-                -- ["<C-j>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<C-k>"] = actions.toggle_selection + actions.move_selection_worse,
+                ["<C-j>"] = actions.toggle_selection + actions.move_selection_better,
             }
         }
     },
