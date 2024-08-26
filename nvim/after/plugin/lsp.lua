@@ -34,8 +34,8 @@ require('mason-lspconfig').setup({
                 vim.keymap.set({ 'n' }, "<leader>cdn", vim.diagnostic.goto_next, opts)
                 vim.keymap.set({ 'n' }, "<leader>cdp", vim.diagnostic.goto_prev, opts)
                 vim.keymap.set({ 'n' }, "<leader>cdb", "<CMD>Trouble diagnostics toggle focus=false filter.buf=0<CR>",
-                    opts)                                                                                                    -- buffer diagnostics
-                vim.keymap.set({ 'n' }, "<leader>cdw", "<CMD>Trouble diagnostics toggle focus=false<CR>", opts)              -- workspace diagnostics
+                    opts)                                                                                       -- buffer diagnostics
+                vim.keymap.set({ 'n' }, "<leader>cdw", "<CMD>Trouble diagnostics toggle focus=false<CR>", opts) -- workspace diagnostics
             end
             if server_name == "bashls" then
                 require('lspconfig')[server_name].setup({
@@ -110,6 +110,13 @@ require('mason-lspconfig').setup({
                     capabilities = capabilities,
                     cmd = { "clangd", "--background-index", "--suggest-missing-includes",
                         "--all-scopes-completion", "--completion-style=detailed",
+                    }
+                })
+            elseif server_name == "jdtls" then
+                require('lspconfig').jdtls.setup({
+                    on_attach = attach_function,
+                    init_options = {
+                        bundles = { "~/.m2/repository/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" }
                     }
                 })
                 -- "--compile-commands-dir=" .. vim.g.cmake_build_dir }, -- custom build dir

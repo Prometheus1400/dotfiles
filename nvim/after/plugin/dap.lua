@@ -28,6 +28,7 @@ vim.keymap.set("n", "<leader>B", function()
     dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 end)
 
+
 -- -- Automatically open and close dap-ui
 -- dap.listeners.after.event_initialized["dapui_config"] = function()
 --   require("dapui").open()
@@ -87,3 +88,27 @@ require("nvim-dap-virtual-text").setup({})
 
 -- python
 require("dap-python").setup(vim.loop.cwd() .. "/.venv/bin/python") -- requires 'debugpy' package in local project
+
+-- C/C++
+dap.adapters.codelldb = {
+    type = 'server',
+    port = "${port}",
+    executable = {
+        command = '/Users/kaleb/.local/share/nvim/mason/packages/codelldb/codelldb',
+        args = { "--port", "${port}" },
+
+    }
+}
+dap.configurations.cpp = {
+    {
+        name = "cpp_launch",
+        type = "codelldb",
+        request = "launch",
+        program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+    },
+}
+dap.configurations.c = dap.configurations.cpp

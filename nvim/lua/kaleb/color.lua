@@ -9,7 +9,13 @@ require("catppuccin").setup {
     -- },
 }
 
--- Lua
+require("tokyonight").setup({
+    -- style = "night",
+    transparent = true,
+    -- lualine_bold = true,
+    -- dim_inactive = false
+})
+
 require('onedark').setup {
     -- Main options --
     style = 'darker',             -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
@@ -49,7 +55,7 @@ require('onedark').setup {
 
 require("rose-pine").setup({
     variant = "auto",      -- auto, main, moon, or dawn
-    dark_variant = "main", -- main, moon, or dawn
+    dark_variant = "moon", -- main, moon, or dawn
     dim_inactive_windows = false,
     extend_background_behind_borders = true,
 
@@ -66,7 +72,8 @@ require("rose-pine").setup({
     },
 })
 
-vim.cmd('colorscheme catppuccin-mocha')
+-- vim.cmd('colorscheme tokyonight-night')
+-- vim.cmd('colorscheme catppuccin-mocha')
 -- vim.cmd('colorscheme nordern')
 -- vim.cmd("colorscheme onedark")
--- vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme rose-pine")

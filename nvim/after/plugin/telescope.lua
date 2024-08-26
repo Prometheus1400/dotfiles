@@ -1,4 +1,5 @@
 local builtin = require('telescope.builtin')
+
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
@@ -8,9 +9,6 @@ vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
 -- keymap to search files for some string
 vim.keymap.set('n', '<leader>fs', builtin.live_grep, {})
--- vim.keymap.set('n', '<leader>fs', function()
---     builtin.grep_string({ search = vim.fn.input("Grep: ") });
--- end)
 
 -- kemap to search buffer for methods or functions
 vim.keymap.set('n', '<leader>fm', function()
@@ -18,7 +16,7 @@ vim.keymap.set('n', '<leader>fm', function()
         symbols = { 'function', 'method' },
         symbol_width = 0,
         show_line = true,
-        symbol_highlights = { 'function', 'method' }
+        symbol_highlights = { 'function', 'method' },
     })
 end, {})
 

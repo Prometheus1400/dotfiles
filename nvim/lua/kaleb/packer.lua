@@ -1,12 +1,9 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require("packer").startup(function(use)
-    -- ESSENTIALS
+    -- BEGIN ESSENTIALS
     use "wbthomason/packer.nvim"
-    use {
-        "nvim-telescope/telescope.nvim", tag = "0.1.8",
-        requires = { { "nvim-lua/plenary.nvim" } }
-    }
+    use { "nvim-telescope/telescope.nvim", tag = "0.1.8", requires = { { "nvim-lua/plenary.nvim" } } }
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
     -- lsp stuff
     use "williamboman/mason.nvim"
@@ -20,53 +17,29 @@ return require("packer").startup(function(use)
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/cmp-nvim-lsp-signature-help"
-    use "mbbill/undotree"           -- undotree
-    use "tpope/vim-commentary"      -- better comment commands
-    use "nvim-lualine/lualine.nvim" -- pretty status line on bottom
-    use {
-        "nvim-tree/nvim-tree.lua",  -- file tree
-        requires = { "nvim-tree/nvim-web-devicons" }
-    }
-    use {
-        "windwp/nvim-autopairs", -- better parenthesis and bracket completion similar to vscode or intellij
-        config = function()
-            require("nvim-autopairs").setup({})
-        end
-    }
-    use({
-        "kylechui/nvim-surround", -- make keybinds for surrounding/deleting surrounds feel native
-        tag = "*",
-        config = function()
-            require("nvim-surround").setup({})
-        end
-    })
-    use {
-        "folke/trouble.nvim", -- work with diagnostics better
-        config = function()
-            require("trouble").setup({})
-        end
-    }
+    use "mbbill/undotree"                                                                                    -- undotree
+    use "tpope/vim-commentary"                                                                               -- better comment commands
+    use "nvim-lualine/lualine.nvim"                                                                          -- pretty status line on bottom
+    use { "nvim-tree/nvim-tree.lua", requires = { "nvim-tree/nvim-web-devicons" } }                          -- file tree
+    use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup({}) end }             -- better parenthesis and bracket completion similar to vscode or intellij
+    use({ "kylechui/nvim-surround", tag = "*", config = function() require("nvim-surround").setup({}) end }) -- make keybinds for surrounding/deleting surrounds feel native
+    use { "folke/trouble.nvim", config = function() require("trouble").setup({}) end }                       -- work with diagnostics better
+    use "lukas-reineke/indent-blankline.nvim"                                                                -- nice indent lines
+    use "christoomey/vim-tmux-navigator"                                                                     -- for seamless navigation across tmux and nvim
+    -- END ESSENTIALS
 
     -- THEMES
     use { "catppuccin/nvim", as = "catppuccin", }
     use "navarasu/onedark.nvim"
     use { "rose-pine/neovim", as = "rose-pine", }
     use { 'fcancelinha/nordern.nvim', as = "nordern" }
+    use "folke/tokyonight.nvim"
 
     -- GIT STUFF
     use "tpope/vim-fugitive"
-    use "lewis6991/gitsigns.nvim" -- OPTIONAL: for git status
-    use {
-        "ruifm/gitlinker.nvim",
-        requires = "nvim-lua/plenary.nvim",
-    }
-    use {
-        "NeogitOrg/neogit",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
-        }
-    }
+    use "lewis6991/gitsigns.nvim"                                      -- for git status in buffer
+    use { "ruifm/gitlinker.nvim", requires = "nvim-lua/plenary.nvim" } -- for copying git link to line in buffer
+    use { "NeogitOrg/neogit", requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" } }
 
     -- DATABASE STUFF
     use {
@@ -81,7 +54,6 @@ return require("packer").startup(function(use)
     use "akinsho/toggleterm.nvim"                 -- popup terminal used for terminal and lazygit
     use "nvim-treesitter/playground"              -- can see the AST for treesitter
     use "brenoprata10/nvim-highlight-colors"      -- highlights hex colors
-    use "lukas-reineke/indent-blankline.nvim"     -- helps when indent is important
     use "nvim-treesitter/nvim-treesitter-context" -- pin nested function or class at top
     use {
         "folke/todo-comments.nvim",               -- highlights 'TODO:' comments
@@ -90,25 +62,18 @@ return require("packer").startup(function(use)
             require("todo-comments").setup({})
         end
     }
-    use "christoomey/vim-tmux-navigator" -- for seamless navigation across tmux and nvim
-    use {
-        "j-hui/fidget.nvim",             -- lsp progress messages
-        config = function()
-            require("fidget").setup({})
-        end
-    }
-    use {
-        "barrett-ruth/live-server.nvim", -- live server for serving html
-        config = function()
-            require('live-server').setup({})
-        end
-    }
-    -- use "luckasRanarison/tailwind-tools.nvim"
-    -- use "romgrk/barbar.nvim" -- TABS: still working out if I like this or not
+    use { "j-hui/fidget.nvim", config = function() require("fidget").setup({}) end }                  -- lsp progress messages
+    use { "barrett-ruth/live-server.nvim", config = function() require('live-server').setup({}) end } -- live server for serving html
 
     -- markdown stuff
-    use { "ellisonleao/glow.nvim", config = function() require("glow").setup() end }
-    use { "lukas-reineke/headlines.nvim", after = "nvim-treesitter", config = function() require("headlines").setup() end }
+    use({
+        'MeanderingProgrammer/render-markdown.nvim', -- great in buffer snytax highlighting and rendering for markdown
+        after = { 'nvim-treesitter' },
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+        config = function()
+            require('render-markdown').setup({})
+        end,
+    })
 
     -- DEBUGGER
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }
@@ -124,10 +89,6 @@ return require("packer").startup(function(use)
     -- LANGUAGE SPECIFIC PLUGINS
     -- PYTHON
     use "mfussenegger/nvim-dap-python" -- debugger
-    --
-    -- GO
-    -- use "ray-x/go.nvim"
-    -- use "ray-x/guihua.lua"
     -- JAVA
     use "mfussenegger/nvim-jdtls"
 end)

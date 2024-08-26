@@ -17,21 +17,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end
 })
 
--- -- makes * and # work on visual mode too.
--- vim.api.nvim_exec(
---     [[
---   function! g:VSetSearch(cmdtype)
---     let temp = @s
---     norm! gv"sy
---     let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
---     let @s = temp
---   endfunction
-
---   xnoremap / :<C-u>call g:VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
---   xnoremap ? :<C-u>call g:VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
--- ]],
---     false
--- )
+-- Enable persistent undo
+vim.opt.undofile = true
+-- Set the undo directory
+vim.opt.undodir = vim.fn.expand("~/.local/share/nvim/undo")
 
 -- Enable autoread when files are changed outside of Neovim
 vim.opt.autoread = true
