@@ -6,19 +6,22 @@ return require("packer").startup(function(use)
     use { "nvim-telescope/telescope.nvim", tag = "0.1.8", requires = { { "nvim-lua/plenary.nvim" } } }
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
     -- lsp stuff
-    use "williamboman/mason.nvim"
-    use "williamboman/mason-lspconfig.nvim"
-    use "nvimtools/none-ls.nvim"
-    use "L3MON4D3/LuaSnip"
-    use "neovim/nvim-lspconfig"
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-cmdline"
-    use "hrsh7th/cmp-nvim-lsp-signature-help"
+    use { "neovim/nvim-lspconfig",
+        requires = {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
+            "nvimtools/none-ls.nvim",
+            "hrsh7th/nvim-cmp",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
+            { "L3MON4D3/LuaSnip", tag = "v2.*", run = "make install_jsregexp", requires = "rafamadriz/friendly-snippets" }
+        }
+    }
     use "mbbill/undotree"                                                                                    -- undotree
-    use "tpope/vim-commentary"                                                                               -- better comment commands
+    use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }                      -- better comment commands
     use "nvim-lualine/lualine.nvim"                                                                          -- pretty status line on bottom
     use { "nvim-tree/nvim-tree.lua", requires = { "nvim-tree/nvim-web-devicons" } }                          -- file tree
     use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup({}) end }             -- better parenthesis and bracket completion similar to vscode or intellij
@@ -62,8 +65,20 @@ return require("packer").startup(function(use)
             require("todo-comments").setup({})
         end
     }
-    use { "j-hui/fidget.nvim", config = function() require("fidget").setup({}) end }                  -- lsp progress messages
-    use { "barrett-ruth/live-server.nvim", config = function() require('live-server').setup({}) end } -- live server for serving html
+    use { "j-hui/fidget.nvim", config = function() require("fidget").setup({}) end }                                          -- lsp progress messages
+    use { "barrett-ruth/live-server.nvim", config = function() require('live-server').setup({}) end }                         -- live server for serving html
+    use { 'jinh0/eyeliner.nvim', config = function() require('eyeliner').setup({ highlight_on_key = true, dim = true }) end } -- better f
+    use({
+        "utilyre/barbecue.nvim",
+        tag = "*",
+        requires = {
+            "SmiteshP/nvim-navic",
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            require("barbecue").setup()
+        end,
+    })
 
     -- markdown stuff
     use({

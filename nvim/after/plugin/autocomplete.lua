@@ -1,12 +1,12 @@
 local cmp = require('cmp')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+require("luasnip.loaders.from_vscode").lazy_load()
 cmp.setup({
     mapping = cmp.mapping.preset.insert({
-        -- Enter key confirms completion item
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<Tab>'] = cmp.mapping.select_next_item(),
-        -- Ctrl + space triggers completion menu
-        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-j>'] = cmp.mapping.select_next_item(),
+        ['<C-k>'] = cmp.mapping.select_prev_item(),
     }),
     snippet = {
         expand = function(args)
@@ -23,6 +23,14 @@ cmp.setup({
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
+    matching = {
+        disallow_symbol_nonprefix_matching = false,
+        disallow_fuzzy_matching = false,
+        disallow_partial_matching = false,
+        disallow_fullfuzzy_matching = true,
+        disallow_prefix_unmatching = true,
+        disallow_partial_fuzzy_matching = true,
+    }
 })
 
 cmp.event:on(
@@ -53,5 +61,4 @@ cmp.setup.cmdline(':', {
     }, {
         { name = 'cmdline' }
     }),
-    matching = { disallow_symbol_nonprefix_matching = false }
 })

@@ -31,3 +31,8 @@ vim.opt.autoread = true
 --     group = 'AutoReload',
 --     command = "checktime"
 -- })
+
+vim.api.nvim_create_user_command("Gup",function ()
+    vim.cmd("Git fetch")
+    vim.cmd("Git pull")
+end, {});

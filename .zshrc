@@ -143,6 +143,7 @@ addToPath "/opt/homebrew/opt/libpq/bin"
 addToPath "/Users/kaleb/Library/Application Support/Coursier/bin"
 addToPath "/Users/kaleb/go/bin"
 addToPath "$HOME/.jenv/bin"
+addToPath "/usr/local/opt/llvm/bin"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
