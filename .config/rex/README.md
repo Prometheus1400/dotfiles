@@ -24,7 +24,7 @@ The prefix is **Ctrl+Space**. Press it, release it, then press the next key.
 | o | Session picker |
 | l | Toggle to the last session visited through session shortcuts, across hosts |
 | g | Open lazygit in a centered 70% × 70% popup in the source directory |
-| [ | Open a read-only scrollback snapshot for visual selection |
+| [ | Enter native copy mode |
 | ( / ) | Previous / next session in order |
 | d | Close the app window; server session remains running |
 | % / " | Split right / down, inheriting the working directory |
@@ -55,12 +55,11 @@ the popup shell; prefix+X closes the whole tab.
 **prefix+g** opens lazygit in a separate popup using the source pane's directory.
 Quit lazygit with `q` to close it and return to the underlying pane. Repeating
 prefix+g while that tab's lazygit popup is open focuses it rather than duplicating it.
-**prefix+[** opens a read-only Neovim popup containing a plain-text scrollback
-snapshot. Use `h/j/k/l`, `/` to search, `v` for character selection, `V` for lines,
-Ctrl+V for rectangular selection, and `y` to copy to the system clipboard and close.
-Use `q` to close without copying, then Cmd+V to paste into the original terminal.
-The snapshot file is private and is deleted as soon as the viewer reads it;
-the viewer disables swap and history files and leaves the source process running.
+**prefix+[** enters Rex's native copy mode in the focused terminal.
+Use `h/j/k/l` to move, `/` to search, `v` for character selection, `V` for lines,
+and Ctrl+V for rectangular selection. Press `y` or Enter to copy to the system
+clipboard and exit, or `q` / Esc to exit without copying. Use Cmd+V to paste.
+Rex's default Cmd+Shift+C shortcut also enters copy mode.
 Programs launched through a noninteractive shell wrapper can appear as the shell
 in Rex's foreground-process information; editor/fzf passthrough detection may
 then miss them. Direct launches and fzf from an interactive shell were checked.
@@ -101,8 +100,6 @@ Content fade modes; the pane-content fade strength has no exposed slider.
   immediately toggle between them.
 - Ctrl+arrow resizing needs the prefix each time. Rex has no tmux repeat-time
   timer, and its amount is a percentage rather than five terminal cells.
-- Rex has no exposed native tmux vi copy mode. The scrollback viewer provides
-  its familiar selection keys through a read-only Neovim snapshot instead.
 - The worktree manager (`Ctrl+;`), lock (`prefix+t`), and other tmux plugin
   bindings are not ported.
 - The custom status bar, CPU/memory/git pills, peach pane labels, 60% window

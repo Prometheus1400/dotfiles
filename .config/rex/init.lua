@@ -302,59 +302,6 @@ rex.action{
 }
 bind("g", "lazygit_popup")
 
-rex.action{
-  name = "copy_scrollback",
-  title = "Select Scrollback in Neovim",
-  run = function(ctx)
-    local terminal = "com.superlogical.terminal"
-    local capture = assert(rex.block.call(terminal, "format", {
-      format = "text", trim = true, unwrap = true, max_bytes = 983040,
-    }))
-    local chunks = { capture.content }
-    local offset = #capture.content
-    if capture.id then
-      while true do
-        local chunk = assert(rex.block.call(terminal, "blob_read", {
-          id = capture.id, offset = offset, max_bytes = 983040,
-        }))
-        chunks[#chunks + 1] = chunk.data
-        offset = offset + #chunk.data
-        if chunk.eof then break end
-      end
-    end
-    local temporary = assert(rex.exec({ "/usr/bin/mktemp" }))
-    assert(temporary.ok, temporary.stderr)
-    local path = temporary.stdout:gsub("%s+$", "")
-    local file = assert(io.open(path, "w"))
-    file:write(table.concat(chunks):gsub("[\r\n]+$", "") .. "\n")
-    file:close()
-    local zoomed
-    local view = assert(rex.session.view{})
-    for _, window in ipairs(view.windows) do
-      if window.window_id == view.active_window_id then zoomed = window.zoomed_block_id end
-    end
-    if zoomed then assert(rex.session.zoom_block{ block_id = zoomed, zoom = false }) end
-    local created, err = rex.session.new_layer{
-      bounds = popup_bounds,
-      focus = true,
-      layout = { block = {
-        flavor = "com.superlogical.terminal.shell",
-        label = "rex-scrollback-viewer",
-        options = {
-          command = {
-            "/opt/homebrew/bin/nvim", "--noplugin", "-n", "-i", "NONE", "-M",
-            "--cmd", "let g:rex_scrollback_zoom = '" .. (zoomed or "") .. "'",
-            "-u", os.getenv("HOME") .. "/.config/rex/scrollback.lua", path,
-          },
-          shell = "none",
-          exit = { on_completion = true },
-        },
-      } },
-    }
-    if not created then os.remove(path); error(err) end
-  end,
-}
-bind("[", "copy_scrollback")
+bind("[", "pane.copy_mode.enter")
 
--- Remaining gaps: native tmux vi copy mode, status-line formats, lock-client,
--- and the worktree plugin binding.
+-- Remaining gaps: status-line formats, lock-client, and the worktree plugin binding.
