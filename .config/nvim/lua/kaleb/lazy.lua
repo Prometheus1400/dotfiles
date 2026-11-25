@@ -34,7 +34,7 @@ require("lazy").setup({
     enabled = false,
   },
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "catpuccin-mocha" } },
+  install = { colorscheme = { "catppuccin-mocha" } },
   -- automatically check for plugin updates
   checker = { enabled = false },
   change_detection = { enabled = false },

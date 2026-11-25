@@ -122,20 +122,6 @@ return {
       appearance = {
         nerd_font_variant = "mono",
       },
-      formatting = {
-        format = function(entry, vim_item)
-          local ok, colorful_menu = pcall(require, "colorful-menu")
-          if not ok then
-            return vim_item
-          end
-          local highlights_info = colorful_menu.cmp_highlights(entry)
-          if highlights_info ~= nil then
-            vim_item.abbr_hl_group = highlights_info.highlights
-            vim_item.abbr = highlights_info.text
-          end
-          return vim_item
-        end,
-      },
     },
     opts_extend = { "sources.default" },
   },

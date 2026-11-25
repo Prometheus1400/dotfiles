@@ -1,0 +1,50 @@
+{
+  "lastChangelogVersion": "1.5.2",
+  "markdown": {
+    "mermaid": "streaming"
+  },
+  "theme": "catppuccin-mocha",
+  "packages": [
+    "npm:pi-subagents",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@narumitw/pi-plan-mode",
+    "npm:pi-vim",
+    "npm:@aliou/pi-processes",
+    "npm:@juicesharp/rpiv-ask-user-question"
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.89.1",
+    "{\"source\":\"npm:@narumitw/pi-plan-mode\",\"scope\":\"user\"}": "0.60.3",
+    "{\"source\":\"npm:@aliou/pi-processes\",\"scope\":\"user\"}": "0.13.7"
+  },
+  "editorPaddingX": 1,
+  "outputPad": 1,
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "hideThinkingBlock": true,
+  "tuiMode": "regular",
+  "quietStartup": true,
+  "cacheWarming": "idle",
+  "enableInstallTelemetry": false,
+  "doubleEscapeAction": "tree",
+  "quietTools": {
+    "levels": {
+      "todo": "hidden",
+      "ask_user_question": "always"
+    },
+    "diffLines": 10
+  },
+  "codeBlocks": {
+    "style": "rail",
+    "wrap": "truncate"
+  },
+  "piVim": {
+    "borderSync": {
+      "insert": "mode",
+      "normal": "mode",
+      "visual": "mode",
+      "ex": "mode"
+    }
+  }
+}
